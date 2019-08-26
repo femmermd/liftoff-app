@@ -30,8 +30,8 @@ public class User {
 
     private String hometown;
 
-    @OneToOne
-    private int photoId;
+/*    @OneToOne
+    private int photoId;*/
 
 
     public User(){};
@@ -89,11 +89,11 @@ public class User {
         this.hometown = hometown;
     }
 
-    public int getPhotoId() {
+/*    public int getPhotoId() {
         return photoId;
     }
 
     public void setPhotoId(int photoId) {
         this.photoId = photoId;
-    }
+    }*/
 }
