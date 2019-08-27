@@ -1,9 +1,11 @@
 package org.launchcode.controllers;
 
 
+import org.launchcode.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -15,8 +17,13 @@ public class AccountController {
         return "login";
     }
 
-    @RequestMapping(value = "/register")
-    public String register(){
-        return "register";
+
+    @RequestMapping(value="register", method = RequestMethod.GET)
+    public String register(Model model){
+    model.addAttribute(new User());
+    return "register";
     }
+
+
+
 }

@@ -6,37 +6,15 @@
 <nav th:replace="fragments :: navigation"></nav>
 <p1>register page</p1>
 
-<form method="post">
+<form th:object="${user}" method="post">
+    <div class="form-group">
 
-    <label for="username" th:text="Username">
-</label>
-    <input type="text" id="username" name="username"/>
-
-
-    <!--<label for="email" th:text="Email">
-    </label>
-    <input type="email" name="email"/>
-
-
-    <label for="password" th:text="Password">
-    </label>
-    <input type="password" name="password"/>
-
-
-    <label for="verify" th:text="Verify password">
-    </label>
-    <input type="password" name="verify"/>
-
-
-    <label for="hometown" th:text="Hometown">
-    </label>
-    <input type="text" name="hometown"/>
-
-    <input type="submit">-->
-
+        <label th:for="username" th:text="Username"></label>
+        <input th:field="*{username}"/>
+        <span th:errors="*{username}">error</span>
+        <input type="submit" value="Register">
+    </div>
 </form>
-
-
 
 
 
