@@ -25,7 +25,6 @@ public class User {
     private List<Review> reviews;*/
 
     @NotNull
-    @Email
     private String email;
 
     private String hometown;
@@ -36,7 +35,8 @@ public class User {
 
     public User(){};
 
-    public User(String username){
+    public User(String username, String password, String email){
+
         this();
         this.username = username;
     }
