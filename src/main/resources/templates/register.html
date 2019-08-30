@@ -25,6 +25,10 @@
         <input th:field="*{email}"/>
         <span th:errors="*{email}">error</span>
 
+        <label th:for="hometown" th:text="Hometown"></label>
+        <input th:field="*{hometown}"/>
+        <span th:errors="*{hometown}">error</span>
+
         <input type="submit" value="Register">
     </div>
 </form>

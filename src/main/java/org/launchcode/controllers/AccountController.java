@@ -3,6 +3,7 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.User;
 import org.launchcode.models.data.UserDao;
+import org.launchcode.models.forms.LoginForm;
 import org.launchcode.models.forms.RegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +25,12 @@ public class AccountController {
 
 
     @RequestMapping(value = "/login")
-    public String login(){
+    public String login(Model model){
+
+        model.addAttribute("form", new LoginForm());
+        model.addAttribute("title","Login");
+
+
         return "login";
     }
 
@@ -46,6 +52,7 @@ public class AccountController {
         }
 
         User user = new User();
+        user.setHometown(form.getHometown());
         user.setUsername(form.getUsername());
         user.setPassword(form.getPassword());
         user.setEmail(form.getEmail());

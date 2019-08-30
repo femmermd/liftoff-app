@@ -25,6 +25,9 @@ public class RegisterForm {
     @Email
     private String email;
 
+
+    private String hometown;
+
     public RegisterForm(){}
 
     public RegisterForm(User user){}
@@ -61,4 +64,14 @@ public class RegisterForm {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getHometown() {
+        return hometown;
+    }
+
+    public void setHometown(String hometown) {
+        this.hometown = hometown;
+    }
+
+
 }

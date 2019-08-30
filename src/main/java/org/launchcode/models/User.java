@@ -24,7 +24,6 @@ public class User {
   /*  @ManyToMany
     private List<Review> reviews;*/
 
-    @NotNull
     private String email;
 
     private String hometown;

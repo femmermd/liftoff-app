@@ -5,14 +5,24 @@
 <h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 
-<!--<form th:object="${account}" method = "post">
+
+
+
+
+
+<form th:object="${form}" method = "post">
     <div class="form-group">
         <label th:for="username"></label>
         <input th:field="*{username}"/>
+        <span th:errors="*{username}">error</span>
+
+        <label th:for="password"></label>
+        <input th:field="*{password}"/>
+        <span th:errors="*{password}">error</span>
         <input type="submit"/>
     </div>
 
-</form>-->
+</form>
 
 <h2>No account? <a href="/register">Register</a></h2>
 
