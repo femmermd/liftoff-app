@@ -9,12 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value="")
@@ -23,8 +22,7 @@ public class AccountController {
     @Autowired
     private UserDao userDao;
 
-
-    @RequestMapping(value = "/login")
+    @GetMapping("/login")
     public String login(Model model){
 
         model.addAttribute("form", new LoginForm());
@@ -33,6 +31,42 @@ public class AccountController {
 
         return "login";
     }
+
+    @PostMapping("/login")
+    public String loginSubmit(@ModelAttribute @Valid LoginForm form, Errors errors, Model model){
+
+        if (errors.hasErrors()){
+            model.addAttribute(form);
+            model.addAttribute("title","Login");
+            return "login";
+        }
+
+        List<User> userList = new ArrayList<>(); //initialize ArrayList for users
+        Iterable<User> userIterable = userDao.findAll(); // user iterable filled with every user from the DAO
+
+        for (User user : userIterable){
+            userList.add(user);
+        }
+        System.out.println(userList); // add each user in the iterable to the userList
+        for (User user : userList){
+            if (user.getUsername().contentEquals(form.getUsername())){
+                if (user.getPassword().contentEquals(form.getPassword())){
+
+                    return "redirect:";
+                }
+            }
+        }
+
+        // search through the userList for the given username
+        // if the username doesn't exist, return "wrong username or password" error
+        // if it does exist, check if the password equals the user's password
+        // if the passwords don't match, return "wrong username or password" error
+        // if the passwords do match, add the user to the session and redirect to the index
+
+
+        return "redirect:";
+    }
+
 
 
     @RequestMapping(value="register", method = RequestMethod.GET)
