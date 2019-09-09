@@ -102,33 +102,18 @@ public class AccountController extends AbstractController {
         setUserInSession(request.getSession(), theUser);
         return "redirect:";
 
-
-/*
-        List<User> userList = new ArrayList<>(); //initialize ArrayList for users
-        Iterable<User> userIterable = userDao.findAll(); // user iterable filled with every user from the DAO
-
-        for (User user : userIterable){
-            userList.add(user);
-        }
-        System.out.println(userList); // add each user in the iterable to the userList
-        for (User user : userList){
-            if (user.getUsername().contentEquals(form.getUsername())){
-                if (user.getPassword().contentEquals(form.getPassword())){
-
-                    return "redirect:";
-                }
-            }
-        }*/
-
-        // search through the userList for the given username
-        // if the username doesn't exist, return "wrong username or password" error
-        // if it does exist, check if the password equals the user's password
-        // if the passwords don't match, return "wrong username or password" error
-        // if the passwords do match, add the user to the session and redirect to the index
-
-
-       /* return "redirect:";*/
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session){
+        if (!getUserFromSession(session).equals(null)) {
+            removeUserFromSession(session);
+        }
+
+        session.removeAttribute("user_id");
+        return "redirect:";
+    }
+
 
 
 }

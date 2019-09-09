@@ -15,7 +15,7 @@ public abstract class AbstractController {
 
     public static final String userSessionKey = "user_id";
 
-    public User getUserFromSesssion (HttpSession session){
+    public User getUserFromSession (HttpSession session){
         Integer userId = (Integer) session.getAttribute(userSessionKey);
         return userId == null ? null : userDao.findById(userId).orElse(null);
     }
@@ -30,7 +30,7 @@ public abstract class AbstractController {
 
     @ModelAttribute("user")
     public User getUserForModel(HttpServletRequest request){
-        return getUserFromSesssion(request.getSession());
+        return getUserFromSession(request.getSession());
     }
 
 }

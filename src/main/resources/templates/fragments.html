@@ -16,6 +16,9 @@
     <span th:if="${user}">
         <span th:object="${user}" th:text="*{username}"></span>
     </span>
+    <span th:if="${user}">
+        <a href="/logout">Logout</a>
+    </span>
     </nav>
 </body>
 </html>
