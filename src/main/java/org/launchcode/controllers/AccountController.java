@@ -1,23 +1,19 @@
 package org.launchcode.controllers;
 
 
-import org.launchcode.models.User;
+import org.launchcode.models.Objects.User;
 import org.launchcode.models.data.UserDao;
 import org.launchcode.models.forms.LoginForm;
 import org.launchcode.models.forms.RegisterForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import sun.misc.Request;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Controller

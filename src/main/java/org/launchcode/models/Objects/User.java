@@ -1,4 +1,4 @@
-package org.launchcode.models;
+package org.launchcode.models.Objects;
 
 
 import org.hibernate.validator.constraints.UniqueElements;
@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class User {
@@ -23,8 +24,8 @@ public class User {
     @Size(min=6, max = 20)
     private String password;
 
-  /*  @ManyToMany
-    private List<Review> reviews;*/
+    @OneToMany
+    private List<Review> reviews;
 
     private String email;
 
@@ -66,13 +67,10 @@ public class User {
         this.password = password;
     }
 
-/*    public List<Review> getReviews() {
+    public List<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }*/
 
     public String getEmail() {
         return email;

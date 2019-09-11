@@ -1,6 +1,6 @@
 package org.launchcode.models.forms;
 
-import org.launchcode.models.User;
+import org.launchcode.models.Objects.User;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
