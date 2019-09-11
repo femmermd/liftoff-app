@@ -17,7 +17,7 @@
         <input th:field="*{coffeeName}"/>
         <span th:errors="*{coffeeName}">error</span>
 
-        <label th:for="drinkType" th:text="Type of drink" ></label>
+        <label th:for="drinkType" th:text="Type"></label>
         <input th:field="*{drinkType}">
         <span th:errors="*{drinkType}">error</span>
 
@@ -29,7 +29,7 @@
         <input th:field="*{rating}"/>
         <span th:errors="*{rating}">error</span>
 
-        <label th:for="brewDevice" th:text="Brew Device"></label>
+        <label th:for="brewDevice" th:text="Brew-Device"></label>
         <input th:field="*{brewDevice}"/>
         <span th:errors="*{brewDevice}">error</span>
 
@@ -49,9 +49,9 @@
         <label th:for="roast" th:text="Roast"></label>
         <input th:field="*{roast}"/>
         <span th:errors="*{roast}">error</span>
-              
 
-        <input type="submit" value="Register">
+
+        <input type="submit" value="Submit">
     </div>
 </form>
 

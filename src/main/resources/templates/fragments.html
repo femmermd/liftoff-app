@@ -11,7 +11,7 @@
 <nav th:fragment="navigation">
     <a href="">Home</a>
     <a href="/profile">Profile</a>
-    <a href="/review">Review</a>
+    <a href="/review/new">Review</a>
     <a href="/login">Login/Register</a>
     <span th:if="${user}">
         <span th:object="${user}" th:text="*{username}"></span>
