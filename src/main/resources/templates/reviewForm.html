@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="'http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+<nav th:replace="fragments :: navigation"></nav>
+<p1>register page</p1>
+
+<form th:object="${form}" method="post">
+    <div class="form-group">
+
+        <label th:for="username" th:text="Username"></label>
+        <input th:field="*{username}"/>
+        <span th:errors="*{username}">error</span>
+
+        <label th:for="coffeeName" th:text="Name"></label>
+        <input th:field="*{coffeeName}"/>
+        <span th:errors="*{coffeeName}">error</span>
+
+        <label th:for="drinkType" th:text="Type of drink" ></label>
+        <input th:field="*{drinkType}">
+        <span th:errors="*{drinkType}">error</span>
+
+        <label th:for="origin"th:text="Origin"></label>
+        <input th:field="*{origin}"/>
+        <span th:errors="*{origin}">error</span>
+
+        <label th:for="rating" th:text="Rating"></label>
+        <input th:field="*{rating}"/>
+        <span th:errors="*{rating}">error</span>
+
+        <label th:for="brewDevice" th:text="Brew Device"></label>
+        <input th:field="*{brewDevice}"/>
+        <span th:errors="*{brewDevice}">error</span>
+
+
+        <label th:for="roaster" th:text="Roaster"></label>
+        <input th:field="*{roaster}"/>
+        <span th:errors="*{roaster}">error</span>
+
+        <label th:for="cafe" th:text="Cafe"></label>
+        <input th:field="*{cafe}"/>
+        <span th:errors="*{cafe}">error</span>
+
+        <label th:for="flavors" th:text="Flavors"></label>
+        <input th:field="*{flavors}"/>
+        <span th:errors="*{flavors}">error</span>
+
+        <label th:for="roast" th:text="Roast"></label>
+        <input th:field="*{roast}"/>
+        <span th:errors="*{roast}">error</span>
+              
+
+        <input type="submit" value="Register">
+    </div>
+</form>
+
+</body>
+</html>
