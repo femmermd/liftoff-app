@@ -1,13 +1,12 @@
 package org.launchcode.models.forms;
 
 
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class ReviewForm {
-
-    @NotNull
-    private String username;
 
     @NotNull
     @Size(min=3, max=30)
@@ -31,13 +30,6 @@ public class ReviewForm {
 
     public ReviewForm(){}
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getCoffeeName() {
         return coffeeName;

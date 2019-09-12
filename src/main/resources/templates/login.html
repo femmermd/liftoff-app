@@ -14,9 +14,9 @@
         <span th:errors="*{username}">error</span>
 
         <label th:for="password"></label>
-        <input th:field="*{password}"/>
+        <input type="password" th:field="*{password}"/>
         <span th:errors="*{password}">error</span>
-        <input type="submit"/>
+        <input type="submit" th:value="Login"/>
     </div>
 
 </form>

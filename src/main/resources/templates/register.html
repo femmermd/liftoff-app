@@ -14,11 +14,11 @@
         <span th:errors="*{username}">error</span>
 
         <label th:for="password" th:text="Password"></label>
-        <input th:field="*{password}"/>
+        <input type="password" th:field="*{password}"/>
         <span th:errors="*{password}">error</span>
 
         <label th:for="verify" th:text="Verify" ></label>
-        <input th:field="*{verify}">
+        <input type="password" th:field="*{verify}">
         <span th:errors="*{verify}">error</span>
 
         <label th:for="email"th:text="Email"></label>

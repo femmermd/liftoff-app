@@ -4,14 +4,11 @@
 <body class="container">
 <h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
-<p1>register page</p1>
+
 
 <form th:object="${form}" method="post">
     <div class="form-group">
 
-        <label th:for="username" th:text="Username"></label>
-        <input th:field="*{username}"/>
-        <span th:errors="*{username}">error</span>
 
         <label th:for="coffeeName" th:text="Name"></label>
         <input th:field="*{coffeeName}"/>
