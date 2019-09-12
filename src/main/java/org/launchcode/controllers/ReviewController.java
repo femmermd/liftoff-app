@@ -17,8 +17,7 @@ import javax.validation.Valid;
 @RequestMapping("review")
 public class ReviewController extends AbstractController{
 
-    @Autowired
-    private ReviewDao reviewDao;
+
 
 
     @GetMapping("new")

@@ -20,8 +20,6 @@ import javax.validation.Valid;
 @RequestMapping("")
 public class AccountController extends AbstractController {
 
-    @Autowired
-    private UserDao userDao;
 
 
 

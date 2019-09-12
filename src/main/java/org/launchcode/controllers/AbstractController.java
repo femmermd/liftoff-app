@@ -1,6 +1,7 @@
 package org.launchcode.controllers;
 
 import org.launchcode.models.Objects.User;
+import org.launchcode.models.data.ReviewDao;
 import org.launchcode.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +13,9 @@ public abstract class AbstractController {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    ReviewDao reviewDao;
 
     public static final String userSessionKey = "user_id";
 
