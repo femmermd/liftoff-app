@@ -10,4 +10,7 @@ import javax.transaction.Transactional;
 @Transactional
 public interface ReviewDao extends CrudRepository<Review, Integer> {
     Review findByUserId(int userId);
+
+    Review findById(int id);
+
 }
