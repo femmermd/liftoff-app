@@ -5,10 +5,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.io.File;
 
 @Repository
 @Transactional
-public interface DBFileDao extends CrudRepository<DBFile, Integer> {
+public interface FileDao extends CrudRepository<DBFile, Integer> {
 
     DBFile findById(int id);
 

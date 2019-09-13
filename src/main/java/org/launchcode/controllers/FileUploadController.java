@@ -1,13 +1,11 @@
 package org.launchcode.controllers;
 
 import com.sun.org.apache.xpath.internal.operations.String;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -15,24 +13,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.logging.Logger;
 
-@RestController
-public class FileController extends AbstractController{
+@Controller
+public class FileUploadController extends AbstractController{
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
     public static java.lang.String uploadDirectory = "C:\\MAMP\\db\\mysql\\liftoff@002dapp\\images"; // this can be any directory I choose to specify, if it doesn't work
 
     @RequestMapping("/upload")
@@ -60,7 +44,6 @@ public class FileController extends AbstractController{
 
 
     }
-*/
 
 
 
