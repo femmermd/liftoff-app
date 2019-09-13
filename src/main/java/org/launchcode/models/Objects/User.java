@@ -1,7 +1,10 @@
 package org.launchcode.models.Objects;
 
 
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.IOUtils.toByteArray;
 import org.hibernate.validator.constraints.UniqueElements;
+import sun.nio.ch.IOUtil;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -31,8 +34,9 @@ public class User {
 
     private String hometown;
 
-/*    @OneToOne
-    private int photoId;*/
+    @Lob
+    @Column(name="photo", columnDefinition = "BLOB")
+    private byte[] photo;
 
 
     public User(){};
@@ -88,11 +92,6 @@ public class User {
         this.hometown = hometown;
     }
 
-/*    public int getPhotoId() {
-        return photoId;
-    }
 
-    public void setPhotoId(int photoId) {
-        this.photoId = photoId;
-    }*/
+
 }
