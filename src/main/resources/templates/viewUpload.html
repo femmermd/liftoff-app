@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="'http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+<nav th:replace="fragments :: navigation"></nav>
+
+<form action="/upload" method="post" enctype="multipart/form-data">
+
+    <input type="file" name="files" multiple/>
+    <input type="submit" value="Upload files"/>
+
+</form>
+
+</body>
+</html>
