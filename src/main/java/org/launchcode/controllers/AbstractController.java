@@ -5,10 +5,13 @@ import org.launchcode.models.data.ReviewDao;
 import org.launchcode.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+
+@RestController
 public abstract class AbstractController {
 
     @Autowired
@@ -16,6 +19,12 @@ public abstract class AbstractController {
 
     @Autowired
     ReviewDao reviewDao;
+
+    
+
+
+
+
 
     public static final String userSessionKey = "user_id";
 
