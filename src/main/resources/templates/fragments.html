@@ -10,16 +10,17 @@
 <body>
 <nav th:fragment="navigation">
     <a href="/">Home</a>
-    <a href="/profile">Profile</a>
     <a href="/review/new">Review</a>
-
     <span th:unless="${user}">
         <a href="/login">Login or Register</a>
     </span>
 
 
-    <span th:if="${user}">
-        <span th:object="${user}" th:text="*{username}"></span>
+    <span th:if="${user}" th:object="${user}">
+        <a th:href="@{/user/{username}(username=*{username})}" th:text="*{username}"></a>
+
+       <!-- /profile/{username}(username=*{username})-->
+
         <a href="/logout">Logout</a>
     </span>
 

@@ -1,5 +1,7 @@
 package org.launchcode.models.Objects;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,6 +12,7 @@ public class User {
 
     @NotNull
     @Size(min=3,max=25)
+    @UniqueElements
     private String username;
 
     @Id

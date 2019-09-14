@@ -1,25 +1,17 @@
 package org.launchcode.controllers;
 
-
-import org.apache.commons.io.IOUtils;
-import org.launchcode.models.Objects.Photo;
 import org.launchcode.models.Objects.User;
 import org.launchcode.models.forms.LoginForm;
-import org.launchcode.models.forms.PhotoForm;
 import org.launchcode.models.forms.RegisterForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 
 @Controller
@@ -30,8 +22,11 @@ public class AccountController extends AbstractController {
 
 
     @RequestMapping(value="")
-    public String index(Model model){
+    public String index(Model model, HttpServletRequest request){
         model.addAttribute("title","Index");
+        if (! (getUserFromSession(request.getSession()) == null)){
+            model.addAttribute(getUserFromSession(request.getSession()));
+        }
         return "index";
     }
 
@@ -114,31 +109,14 @@ public class AccountController extends AbstractController {
         return "redirect:";
     }
 
-    @GetMapping("/photo")
-    public String photo(Model model){
-        model.addAttribute("form", new PhotoForm());
-        model.addAttribute("title", "Upload a profile picture");
-        return "photo";
+    @GetMapping("/user/{username}")
+    public String viewProfile(@PathVariable String username, Model model){
+
+        model.addAttribute("user", userDao.findByUsername(username));
+        return "profile";
     }
 
-    @PostMapping("/photo")
-    public String processPhoto (@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
 
-        Photo newPhoto = new Photo();
-
-        FileInputStream targetStream = new FileInputStream(convert(file)) {
-            @Override
-            public int read() throws IOException {
-                return 0;
-            }
-        };
-
-        byte[] byteArray = IOUtils.toByteArray(targetStream);
-        newPhoto.setPhoto(byteArray);
-        newPhoto.setUser(getUserFromSession(request.getSession()));
-        photoDao.save(newPhoto);
-        return "redirect:/";
-    }
 
 
 }

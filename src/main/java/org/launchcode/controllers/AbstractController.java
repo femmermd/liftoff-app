@@ -1,19 +1,23 @@
 package org.launchcode.controllers;
 
+import org.apache.commons.io.IOUtils;
+import org.launchcode.models.Objects.Photo;
 import org.launchcode.models.Objects.User;
 import org.launchcode.models.data.FileDao;
 import org.launchcode.models.data.ReviewDao;
 import org.launchcode.models.data.UserDao;
+import org.launchcode.models.forms.PhotoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -52,6 +56,35 @@ public abstract class AbstractController {
         fos.close();
         return convFile;
     }
+
+    @GetMapping("/photo")
+    public String photo(Model model){
+        model.addAttribute("form", new PhotoForm());
+        model.addAttribute("title", "Upload a profile picture");
+        return "photo";
+    }
+
+    @PostMapping("/photo")
+    public String processPhoto (@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+
+        Photo newPhoto = new Photo();
+
+        FileInputStream targetStream = new FileInputStream(convert(file)) {
+            @Override
+            public int read() throws IOException {
+                return 0;
+            }
+        };
+
+        byte[] byteArray = IOUtils.toByteArray(targetStream);
+        newPhoto.setPhoto(byteArray);
+        newPhoto.setUser(getUserFromSession(request.getSession()));
+        photoDao.save(newPhoto);
+        return "redirect:/";
+    }
+
+
+
 
 
     @ModelAttribute("user")

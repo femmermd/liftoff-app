@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="'http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+<h1 th:text="${title}">Default Title</h1>
+<nav th:replace="fragments :: navigation"></nav>
+
+
+<div th:object="${user}">
+    <h1 th:text="*{username}"></h1>
+
+</div>
+
+<!--
+<div th:object="${review}">
+    <h1 th:text="*{coffeeName}"></h1>
+    <p1 th:text="*{drinkType}"></p1>
+    <p1 th:text="*{origin}"></p1>
+    <p1 th:text="*{rating}"></p1>
+    <p1 th:text="*{brewDevice}"></p1>
+    <p1 th:text="*{roaster}"></p1>
+    <p1 th:text="*{cafe}"></p1>
+    <p1 th:text="*{flavors}"></p1>
+    <p1 th:text="*{roast}"></p1>
+
+</div>-->
+
+
+
+</body>
+</html>
