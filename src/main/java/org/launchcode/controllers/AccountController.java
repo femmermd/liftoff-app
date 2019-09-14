@@ -1,19 +1,25 @@
 package org.launchcode.controllers;
 
 
+import org.apache.commons.io.IOUtils;
+import org.launchcode.models.Objects.Photo;
 import org.launchcode.models.Objects.User;
-import org.launchcode.models.data.UserDao;
 import org.launchcode.models.forms.LoginForm;
+import org.launchcode.models.forms.PhotoForm;
 import org.launchcode.models.forms.RegisterForm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 @Controller
@@ -37,7 +43,7 @@ public class AccountController extends AbstractController {
     }
 
     @RequestMapping(value="register", method = RequestMethod.POST)
-    public String regVerify(@ModelAttribute @Valid RegisterForm form, Errors errors, HttpServletRequest request){
+    public String regVerify(@ModelAttribute @Valid RegisterForm form, Errors errors, HttpServletRequest request) throws IOException {
 
         if (errors.hasErrors()){
             return "register";
@@ -108,6 +114,31 @@ public class AccountController extends AbstractController {
         return "redirect:";
     }
 
+    @GetMapping("/photo")
+    public String photo(Model model){
+        model.addAttribute("form", new PhotoForm());
+        model.addAttribute("title", "Upload a profile picture");
+        return "photo";
+    }
+
+    @PostMapping("/photo")
+    public String processPhoto (@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+
+        Photo newPhoto = new Photo();
+
+        FileInputStream targetStream = new FileInputStream(convert(file)) {
+            @Override
+            public int read() throws IOException {
+                return 0;
+            }
+        };
+
+        byte[] byteArray = IOUtils.toByteArray(targetStream);
+        newPhoto.setPhoto(byteArray);
+        newPhoto.setUser(getUserFromSession(request.getSession()));
+        photoDao.save(newPhoto);
+        return "redirect:/";
+    }
 
 
 }

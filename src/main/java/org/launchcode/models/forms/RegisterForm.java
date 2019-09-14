@@ -1,10 +1,13 @@
 package org.launchcode.models.forms;
 
+import javassist.bytecode.ByteArray;
 import org.launchcode.models.Objects.User;
 
+import javax.persistence.Lob;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.File;
 
 
 public class RegisterForm {
@@ -28,9 +31,12 @@ public class RegisterForm {
 
     private String hometown;
 
+
+
     public RegisterForm(){}
 
     public RegisterForm(User user){}
+
 
 
     public String getUsername() {
