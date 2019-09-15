@@ -12,10 +12,11 @@ public class Review {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
     private User user;
 
     private String photoId;
+
+    private int imageScale = 400;
 
     /*@OneToMany
     private int commentId;*/
@@ -42,6 +43,14 @@ public class Review {
 
     public String getPhotoId() {
         return photoId;
+    }
+
+    public int getImageScale() {
+        return imageScale;
+    }
+
+    public void setImageScale(int imageScale) {
+        this.imageScale = imageScale;
     }
 
     public void setPhotoId(String photoId) {

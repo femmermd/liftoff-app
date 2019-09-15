@@ -49,7 +49,7 @@ public class AccountController extends AbstractController {
     }
 
     @RequestMapping(value="register", method = RequestMethod.POST)
-    public String regVerify(@ModelAttribute @Valid RegisterForm form, Errors errors, HttpServletRequest request) throws IOException {
+    public String regVerify(@ModelAttribute @Valid RegisterForm form, @RequestParam("photo") MultipartFile photo, Errors errors, HttpServletRequest request) throws IOException {
 
         if (errors.hasErrors()){
             return "register";
@@ -62,11 +62,15 @@ public class AccountController extends AbstractController {
             return "register";
         }
 
+        Map upload = cloudinary.uploader().upload(photo.getBytes(), ObjectUtils.emptyMap());
+        String photoId = upload.get("public_id").toString();
+
         User newUser = new User();
         newUser.setHometown(form.getHometown());
         newUser.setUsername(form.getUsername());
         newUser.setPassword(form.getPassword());
         newUser.setEmail(form.getEmail());
+        newUser.setPhotoId(photoId);
         userDao.save(newUser);
         setUserInSession(request.getSession(), newUser);
         return "redirect:";
@@ -127,6 +131,14 @@ public class AccountController extends AbstractController {
 
         model.addAttribute("user", user);
         model.addAttribute("photoId",user.getPhotoId());
+
+        ArrayList<Review> reviewList= new ArrayList<Review>();
+        reviewDao.findAllByUserId(user.getId()).forEach(reviewList::add);
+
+        model.addAttribute("reviewList",reviewList);
+
+
+
         return "profile";
     }
 

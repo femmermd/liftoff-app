@@ -8,13 +8,12 @@
 
 
 
+<form enctype="multipart/form-data" method="post">
 
+    <label for="photo" th:text="Photo"></label>
+    <input type="file" name="photo" id="photo"/>
 
-
-<form th:object="${form}" method="post" >
-
-
-    <div class="form-group">
+    <div th:object="${form}" class="form-group">
 
         <label th:for="username" th:text="Username"></label>
         <input th:field="*{username}"/>
@@ -35,10 +34,14 @@
         <label th:for="hometown" th:text="Hometown"></label>
         <input th:field="*{hometown}"/>
         <span th:errors="*{hometown}">error</span>
-
-        <input type="submit" value="Register">
     </div>
+    <input type="submit" value="Register">
 </form>
+
+
+
+
+
 
 </body>
 </html>

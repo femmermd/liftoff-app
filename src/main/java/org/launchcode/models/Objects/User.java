@@ -30,6 +30,8 @@ public class User {
 
     private String photoId;
 
+    private int imageScale = 400;
+
 
     public String getPhotoId() {
         return photoId;
@@ -46,6 +48,13 @@ public class User {
         this.username = username;
     }
 
+    public int getImageScale() {
+        return imageScale;
+    }
+
+    public void setImageScale(int imageScale) {
+        this.imageScale = imageScale;
+    }
 
     public String getUsername() {
         return username;
