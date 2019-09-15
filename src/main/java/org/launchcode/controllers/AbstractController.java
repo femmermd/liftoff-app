@@ -1,9 +1,8 @@
 package org.launchcode.controllers;
 
-import org.apache.commons.io.IOUtils;
-import org.launchcode.models.Objects.Photo;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import org.launchcode.models.Objects.User;
-import org.launchcode.models.data.FileDao;
 import org.launchcode.models.data.ReviewDao;
 import org.launchcode.models.data.UserDao;
 import org.launchcode.models.forms.PhotoForm;
@@ -12,14 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.util.Map;
 
 @Controller
 public abstract class AbstractController {
@@ -30,9 +26,13 @@ public abstract class AbstractController {
     @Autowired
     ReviewDao reviewDao;
 
-    @Autowired
-    FileDao photoDao;
+/*    @Autowired
+    FileDao photoDao;*/
 
+    Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+            "cloud_name", "dzpvkjnfe",
+            "api_key", "466638955192594",
+            "api_secret", "1JlouVrBRX0ZjJ2TfBBGK80kfb8"));
     public static final String userSessionKey = "user_id";
 
     public User getUserFromSession (HttpSession session){
@@ -65,24 +65,15 @@ public abstract class AbstractController {
     }
 
     @PostMapping("/photo")
-    public String processPhoto (@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+    public String processProfilePhoto(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
 
-        Photo newPhoto = new Photo();
-
-        FileInputStream targetStream = new FileInputStream(convert(file)) {
-            @Override
-            public int read() throws IOException {
-                return 0;
-            }
-        };
-
-        byte[] byteArray = IOUtils.toByteArray(targetStream);
-        newPhoto.setPhoto(byteArray);
-        newPhoto.setUser(getUserFromSession(request.getSession()));
-        photoDao.save(newPhoto);
-        return "redirect:/";
+        Map upload = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+        User user = getUserFromSession(request.getSession());
+        String id = upload.get("public_id").toString();
+        user.setPhotoId(id);
+        userDao.save(user);
+        return "redirect:";
     }
-
 
 
 

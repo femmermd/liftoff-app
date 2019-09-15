@@ -1,7 +1,5 @@
 package org.launchcode.models.Objects;
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,7 +10,7 @@ public class User {
 
     @NotNull
     @Size(min=3,max=25)
-    @UniqueElements
+
     private String username;
 
     @Id
@@ -30,10 +28,16 @@ public class User {
 
     private String hometown;
 
-    @OneToOne
-    private Photo photo;
+    private String photoId;
 
 
+    public String getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(String photoId) {
+        this.photoId = photoId;
+    }
     public User(){};
 
     public User(String username, String password, String email){
@@ -42,14 +46,6 @@ public class User {
         this.username = username;
     }
 
-
-    public Photo getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(Photo photo) {
-        this.photo = photo;
-    }
 
     public String getUsername() {
         return username;

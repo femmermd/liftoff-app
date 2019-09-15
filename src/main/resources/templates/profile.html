@@ -5,10 +5,11 @@
 <h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 
-
+<img th:src="@{http://res.cloudinary.com/dzpvkjnfe/image/upload/v1568512137/{photoId}.jpg(photoId=${photoId})}">
 <div th:object="${user}">
     <h1 th:text="*{username}"></h1>
-
+    <p1 th:text="*{email}"></p1>
+    <p1 th:text="*{hometown}"></p1>
 </div>
 
 <!--

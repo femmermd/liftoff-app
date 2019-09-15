@@ -110,9 +110,12 @@ public class AccountController extends AbstractController {
     }
 
     @GetMapping("/user/{username}")
-    public String viewProfile(@PathVariable String username, Model model){
+    public String viewProfile(@PathVariable String username, Model model) throws IOException {
 
-        model.addAttribute("user", userDao.findByUsername(username));
+        User user = userDao.findByUsername(username);
+
+        model.addAttribute("user", user);
+        model.addAttribute("photoId",user.getPhotoId());
         return "profile";
     }
 
