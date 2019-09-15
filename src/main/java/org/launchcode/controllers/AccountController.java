@@ -1,6 +1,7 @@
 package org.launchcode.controllers;
 
 import com.cloudinary.utils.ObjectUtils;
+import org.launchcode.models.Objects.Review;
 import org.launchcode.models.Objects.User;
 import org.launchcode.models.forms.LoginForm;
 import org.launchcode.models.forms.PhotoForm;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 
@@ -31,6 +33,11 @@ public class AccountController extends AbstractController {
         if (! (getUserFromSession(request.getSession()) == null)){
             model.addAttribute(getUserFromSession(request.getSession()));
         }
+
+        ArrayList<Review> reviewList= new ArrayList<Review>();
+        reviewDao.findAll().forEach(reviewList::add);
+        System.out.println(reviewList);
+        model.addAttribute("reviewList",reviewList);
         return "index";
     }
 

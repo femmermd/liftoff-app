@@ -17,7 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 @Controller
 @RequestMapping("review")
@@ -77,9 +81,6 @@ public class ReviewController extends AbstractController{
     }
 
 
-
-
-
     @GetMapping("/{reviewId}")
     public String viewReview(@PathVariable int reviewId, Model model){
 
@@ -88,19 +89,13 @@ public class ReviewController extends AbstractController{
     }
 
 
-
-
-
-
-
-
-
     @GetMapping("/reviewphoto")
     public String reviewPhoto(Model model){
         model.addAttribute("form", new PhotoForm());
         model.addAttribute("title", "Upload a profile picture");
         return "photo";
     }
+
 
 
 
