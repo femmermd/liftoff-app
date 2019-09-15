@@ -18,7 +18,27 @@
         <p1 th:text="*{cafe}"></p1>
         <p1 th:text="*{flavors}"></p1>
         <p1 th:text="*{roast}"></p1>
+        <div th:each="comment : ${commentList}">
+            <div th:if="${comment.review.id} == ${review.id}">
+                <p1 th:text="${comment.text}"></p1>
+            </div>
+
+        </div>
+
+        <form  class = "form-group" method="post">
+            <div th:object="${commentForm}">
+                <label th:for="text" th:text="Comment"></label>
+                <input th:field="*{text}"/>
+                <span th:errors="*{text}">error</span>
+
+                <input th:type="submit" th:value="submit"/>
+            </div>
+            <input th:type="hidden" th:value="*{id}" name="reviewId">
+
+        </form>
+
     </div>
+
 </div>
 
 

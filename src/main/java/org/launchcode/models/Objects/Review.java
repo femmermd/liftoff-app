@@ -3,6 +3,9 @@ package org.launchcode.models.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Review {
@@ -18,8 +21,8 @@ public class Review {
 
     private int imageScale = 400;
 
-    /*@OneToMany
-    private int commentId;*/
+    @OneToMany(mappedBy = "review")
+    private Set<Comment> comments;
 
     @NotNull
     @Size(min=3, max=30)
@@ -40,6 +43,37 @@ public class Review {
     private String flavors;
 
     private String roast;
+
+    private String story;
+
+    public Review(){};
+
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", user=" + user +
+                ", comments=" + comments +
+                '}';
+    }
+
+    public String getStory() {
+        return story;
+    }
+
+    public void setStory(String story) {
+        this.story = story;
+    }
+
 
     public String getPhotoId() {
         return photoId;
@@ -73,14 +107,7 @@ public class Review {
         this.user = user;
     }
 
-/*
-    public int getCommentId() {
-        return commentId;
-    }
 
-    public void setCommentId(int commentId) {
-        this.commentId = commentId;
-    }*/
 
     public String getCoffeeName() {
         return coffeeName;

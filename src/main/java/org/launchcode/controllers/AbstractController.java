@@ -3,6 +3,7 @@ package org.launchcode.controllers;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import org.launchcode.models.Objects.User;
+import org.launchcode.models.data.CommentDao;
 import org.launchcode.models.data.ReviewDao;
 import org.launchcode.models.data.UserDao;
 import org.launchcode.models.forms.PhotoForm;
@@ -26,8 +27,9 @@ public abstract class AbstractController {
     @Autowired
     ReviewDao reviewDao;
 
-/*    @Autowired
-    FileDao photoDao;*/
+    @Autowired
+    CommentDao commentDao;
+
 
     Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "dzpvkjnfe",

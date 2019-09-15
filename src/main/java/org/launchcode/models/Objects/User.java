@@ -24,6 +24,9 @@ public class User {
     @OneToMany
     private List<Review> reviews;
 
+    @OneToMany
+    private List<Comment> comments;
+
     private String email;
 
     private String hometown;

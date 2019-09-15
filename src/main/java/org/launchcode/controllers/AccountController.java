@@ -1,8 +1,11 @@
 package org.launchcode.controllers;
 
 import com.cloudinary.utils.ObjectUtils;
+import org.hibernate.collection.internal.PersistentBag;
+import org.launchcode.models.Objects.Comment;
 import org.launchcode.models.Objects.Review;
 import org.launchcode.models.Objects.User;
+import org.launchcode.models.forms.CommentForm;
 import org.launchcode.models.forms.LoginForm;
 import org.launchcode.models.forms.PhotoForm;
 import org.launchcode.models.forms.RegisterForm;
@@ -16,8 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
+import java.util.*;
 
 
 @Controller
@@ -36,10 +38,52 @@ public class AccountController extends AbstractController {
 
         ArrayList<Review> reviewList= new ArrayList<Review>();
         reviewDao.findAll().forEach(reviewList::add);
-        System.out.println(reviewList);
+
+
+        ArrayList<Comment> commentList = new ArrayList<Comment>();
+        commentDao.findAll().forEach(commentList::add);
+
+
         model.addAttribute("reviewList",reviewList);
+        model.addAttribute("commentList",commentList);
+        model.addAttribute("commentForm", new CommentForm());
+
+/*        Review firstReview = reviewList.get(0);
+        System.out.println(firstReview.getComments().*/
         return "index";
     }
+
+    @PostMapping(value="")
+    public String index(@ModelAttribute @Valid CommentForm form, @RequestParam("reviewId") int reviewId, Errors errors, HttpServletRequest request){
+
+        if (errors.hasErrors()){
+            return "index";
+        }
+
+        if (getUserFromSession(request.getSession()) == null){
+            return "redirect:login";
+        }
+
+        Comment comment = new Comment();
+        comment.setReview(reviewDao.findById(reviewId));
+        comment.setText(form.getText());
+        comment.setUser(getUserFromSession(request.getSession()));
+        commentDao.save(comment);
+        Review review = reviewDao.findById(reviewId);
+        ArrayList<Comment> commentList = new ArrayList<Comment>();
+
+        if (! review.getComments().isEmpty()){
+            review.getComments().addAll(commentList);}
+
+        commentList.add(comment);
+        Set<Comment> set = new HashSet(commentList);
+        review.setComments(set);
+        reviewDao.save(review);
+
+        return "redirect:";
+    }
+
+
 
     @RequestMapping(value="register", method = RequestMethod.GET)
     public String register(Model model){
