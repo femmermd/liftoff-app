@@ -48,7 +48,7 @@ public abstract class AbstractController {
         session.removeAttribute("user_id");
     }
 
-    public static File convert(MultipartFile file) throws IOException {
+    public File convert(MultipartFile file) throws IOException {
         File convFile = new File(file.getOriginalFilename());
         convFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(convFile);
@@ -57,23 +57,15 @@ public abstract class AbstractController {
         return convFile;
     }
 
-    @GetMapping("/photo")
-    public String photo(Model model){
-        model.addAttribute("form", new PhotoForm());
-        model.addAttribute("title", "Upload a profile picture");
-        return "photo";
-    }
+    public String photoToId(File photo) throws IOException {
 
-    @PostMapping("/photo")
-    public String processProfilePhoto(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
-
-        Map upload = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-        User user = getUserFromSession(request.getSession());
+        Map upload = cloudinary.uploader().upload(photo, ObjectUtils.emptyMap());
         String id = upload.get("public_id").toString();
-        user.setPhotoId(id);
-        userDao.save(user);
-        return "redirect:";
+        return id;
+
     }
+
+
 
 
 

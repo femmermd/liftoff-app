@@ -15,6 +15,8 @@ public class Review {
     @JoinColumn(name="user_id")
     private User user;
 
+    private String photoId;
+
     /*@OneToMany
     private int commentId;*/
 
@@ -37,6 +39,14 @@ public class Review {
     private String flavors;
 
     private String roast;
+
+    public String getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(String photoId) {
+        this.photoId = photoId;
+    }
 
     public int getId() {
         return id;

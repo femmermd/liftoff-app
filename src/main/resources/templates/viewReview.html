@@ -6,6 +6,7 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 <div th:object="${review}">
+    <img th:src="@{http://res.cloudinary.com/dzpvkjnfe/image/upload/v1568512137/{photoId}.jpg(photoId=*{photoId})}"/>
     <h1 th:text="*{coffeeName}"></h1>
     <p1 th:text="*{drinkType}"></p1>
     <p1 th:text="*{origin}"></p1>
@@ -15,7 +16,6 @@
     <p1 th:text="*{cafe}"></p1>
     <p1 th:text="*{flavors}"></p1>
     <p1 th:text="*{roast}"></p1>
-
 </div>
 
 

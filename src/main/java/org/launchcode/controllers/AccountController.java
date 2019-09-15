@@ -1,17 +1,21 @@
 package org.launchcode.controllers;
 
+import com.cloudinary.utils.ObjectUtils;
 import org.launchcode.models.Objects.User;
 import org.launchcode.models.forms.LoginForm;
+import org.launchcode.models.forms.PhotoForm;
 import org.launchcode.models.forms.RegisterForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.Map;
 
 
 @Controller
@@ -119,6 +123,23 @@ public class AccountController extends AbstractController {
         return "profile";
     }
 
+    @GetMapping("/profilephoto")
+    public String profilePhoto(Model model){
+        model.addAttribute("form", new PhotoForm());
+        model.addAttribute("title", "Upload a profile picture");
+        return "photo";
+    }
+
+    @PostMapping("/profilephoto")
+    public String processProfilePhoto(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
+
+        Map upload = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+        User user = getUserFromSession(request.getSession());
+        String id = upload.get("public_id").toString();
+        user.setPhotoId(id);
+        userDao.save(user);
+        return "redirect:";
+    }
 
 
 

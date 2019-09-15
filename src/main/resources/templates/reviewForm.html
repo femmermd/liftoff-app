@@ -6,9 +6,12 @@
 <nav th:replace="fragments :: navigation"></nav>
 
 
-<form th:object="${form}" method="post">
-    <div class="form-group">
+<form enctype="multipart/form-data" method="post">
 
+    <label for="photo" th:text="Photo"></label>
+    <input type="file" name="photo" id="photo"/>
+
+    <div th:object="${form}" class="form-group">
 
         <label th:for="coffeeName" th:text="Name"></label>
         <input th:field="*{coffeeName}"/>
@@ -47,9 +50,8 @@
         <input th:field="*{roast}"/>
         <span th:errors="*{roast}">error</span>
 
-
-        <input type="submit" value="Submit">
     </div>
+    <input type="submit" value="Submit">
 </form>
 
 </body>
