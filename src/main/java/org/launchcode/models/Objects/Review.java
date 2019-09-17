@@ -32,6 +32,7 @@ public class Review {
 
     private String origin;
 
+
     private Double rating;
 
     private String brewDevice;

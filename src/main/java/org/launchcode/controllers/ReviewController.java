@@ -89,14 +89,4 @@ public class ReviewController extends AbstractController{
     }
 
 
-    @GetMapping("/reviewphoto")
-    public String reviewPhoto(Model model){
-        model.addAttribute("form", new PhotoForm());
-        model.addAttribute("title", "Upload a profile picture");
-        return "photo";
-    }
-
-
-
-
 }

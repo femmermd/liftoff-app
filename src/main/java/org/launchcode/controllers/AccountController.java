@@ -48,8 +48,6 @@ public class AccountController extends AbstractController {
         model.addAttribute("commentList",commentList);
         model.addAttribute("commentForm", new CommentForm());
 
-/*        Review firstReview = reviewList.get(0);
-        System.out.println(firstReview.getComments().*/
         return "index";
     }
 
