@@ -2,9 +2,11 @@ package org.launchcode.controllers;
 
 
 import com.cloudinary.utils.ObjectUtils;
+import org.launchcode.models.Objects.Comment;
 import org.launchcode.models.Objects.Review;
 import org.launchcode.models.Objects.User;
 import org.launchcode.models.data.ReviewDao;
+import org.launchcode.models.forms.CommentForm;
 import org.launchcode.models.forms.PhotoForm;
 import org.launchcode.models.forms.ReviewForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 @Controller
@@ -82,11 +81,54 @@ public class ReviewController extends AbstractController{
 
 
     @GetMapping("/{reviewId}")
-    public String viewReview(@PathVariable int reviewId, Model model){
+    public String viewReview(@PathVariable int reviewId, Model model, HttpServletRequest request){
 
+        if (! (getUserFromSession(request.getSession()) == null)){
+            model.addAttribute(getUserFromSession(request.getSession()));
+        }
+
+        ArrayList<Comment> commentList = new ArrayList<Comment>();
+        commentDao.findAll().forEach(commentList::add);
+        model.addAttribute("commentForm", new CommentForm());
+        model.addAttribute(commentList);
         model.addAttribute("review", reviewDao.findById(reviewId));
+
+
         return "viewReview";
     }
 
+    @RequestMapping(value = "/{reviewId}", method = RequestMethod.POST)
+    public String commentReview(@PathVariable int reviewId, @ModelAttribute @Valid CommentForm form, Errors errors, HttpServletRequest request, Model model){
+
+        if (errors.hasErrors()){
+            return "index";
+        }
+
+        if (getUserFromSession(request.getSession()) == null){
+            return "redirect:/login";
+        }
+
+        Comment comment = new Comment();
+        comment.setReview(reviewDao.findById(reviewId));
+        comment.setText(form.getText());
+        comment.setUser(getUserFromSession(request.getSession()));
+        commentDao.save(comment);
+        Review review = reviewDao.findById(reviewId);
+        ArrayList<Comment> commentList = new ArrayList<Comment>();
+
+        if (! review.getComments().isEmpty()){
+            review.getComments().addAll(commentList);}
+
+        commentList.add(comment);
+        Set<Comment> set = new HashSet(commentList);
+        review.setComments(set);
+        reviewDao.save(review);
+
+        model.addAttribute(commentList);
+
+        return "redirect:{reviewId}";
+
+
+    }
 
 }

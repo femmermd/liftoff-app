@@ -16,6 +16,8 @@ public class Comment {
     @JoinColumn(name="review_id")
     Review review;
 
+
+
     private String text;
 
     public Comment(){};

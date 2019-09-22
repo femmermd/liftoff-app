@@ -35,6 +35,7 @@ public abstract class AbstractController {
             "cloud_name", "dzpvkjnfe",
             "api_key", "466638955192594",
             "api_secret", "1JlouVrBRX0ZjJ2TfBBGK80kfb8"));
+
     public static final String userSessionKey = "user_id";
 
     public User getUserFromSession (HttpSession session){
@@ -50,26 +51,22 @@ public abstract class AbstractController {
         session.removeAttribute("user_id");
     }
 
-    public File convert(MultipartFile file) throws IOException {
+/*    public File convert(MultipartFile file) throws IOException {
         File convFile = new File(file.getOriginalFilename());
         convFile.createNewFile();
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write(file.getBytes());
         fos.close();
         return convFile;
-    }
-
+    }*/
+/*
     public String photoToId(File photo) throws IOException {
 
         Map upload = cloudinary.uploader().upload(photo, ObjectUtils.emptyMap());
         String id = upload.get("public_id").toString();
         return id;
 
-    }
-
-
-
-
+    }*/
 
 
     @ModelAttribute("user")
