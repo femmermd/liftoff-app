@@ -10,8 +10,9 @@
     <h1 th:text="*{username}"></h1>
     <p1 th:text="*{email}"></p1>
     <p1 th:text="*{hometown}"></p1>
+    <p1 th:text="*{bio}"></p1>
 </div>
-<a href="/profilephoto">Pick your profile pic!</a>
+<!--<a href="/profilephoto">Pick your profile pic!</a>-->
 
 <div th:each="review : ${reviewList}">
     <div th:object="${review}">
@@ -20,6 +21,7 @@
         <p1 th:text="*{drinkType}"></p1>
         <p1 th:text="*{origin}"></p1>
         <p1 th:text="*{rating}"></p1>
+        <p1 th:text="*{story}"></p1>
         <p1 th:text="*{brewDevice}"></p1>
         <p1 th:text="*{roaster}"></p1>
         <p1 th:text="*{cafe}"></p1>

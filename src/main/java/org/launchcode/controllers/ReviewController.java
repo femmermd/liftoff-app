@@ -5,11 +5,8 @@ import com.cloudinary.utils.ObjectUtils;
 import org.launchcode.models.Objects.Comment;
 import org.launchcode.models.Objects.Review;
 import org.launchcode.models.Objects.User;
-import org.launchcode.models.data.ReviewDao;
 import org.launchcode.models.forms.CommentForm;
-import org.launchcode.models.forms.PhotoForm;
 import org.launchcode.models.forms.ReviewForm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -19,8 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 @RequestMapping("review")
@@ -55,6 +54,7 @@ public class ReviewController extends AbstractController{
         newReview.setDrinkType(form.getDrinkType());
         newReview.setOrigin(form.getOrigin());
         newReview.setRating(form.getRating());
+        newReview.setStory(form.getStory());
         newReview.setBrewDevice(form.getBrewDevice());
         newReview.setRoaster(form.getRoaster());
         newReview.setCafe(form.getCafe());

@@ -1,14 +1,8 @@
 package org.launchcode.models.forms;
 
 
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.File;
 
 public class ReviewForm {
 
@@ -22,6 +16,8 @@ public class ReviewForm {
 
     private Double rating;
 
+    private String story;
+
     private String brewDevice;
 
     private String roaster;
@@ -33,11 +29,15 @@ public class ReviewForm {
     private String roast;
 
 
-
     public ReviewForm(){}
 
+    public String getStory() {
+        return story;
+    }
 
-
+    public void setStory(String story) {
+        this.story = story;
+    }
 
     public String getCoffeeName() {
         return coffeeName;

@@ -29,6 +29,9 @@
         <input th:field="*{rating}"/>
         <span th:errors="*{rating}">error</span>
 
+        <label th:for="story" th:text="Story"></label>
+        <textarea th:field="*{story}" placeholder="What's the story?"/>
+
         <label th:for="brewDevice" th:text="Brew-Device"></label>
         <input th:field="*{brewDevice}"/>
         <span th:errors="*{brewDevice}">error</span>

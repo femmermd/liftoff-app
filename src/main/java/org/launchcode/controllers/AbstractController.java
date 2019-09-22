@@ -6,17 +6,12 @@ import org.launchcode.models.Objects.User;
 import org.launchcode.models.data.CommentDao;
 import org.launchcode.models.data.ReviewDao;
 import org.launchcode.models.data.UserDao;
-import org.launchcode.models.forms.PhotoForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.util.Map;
 
 @Controller
 public abstract class AbstractController {
@@ -29,7 +24,6 @@ public abstract class AbstractController {
 
     @Autowired
     CommentDao commentDao;
-
 
     Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "dzpvkjnfe",
@@ -50,24 +44,6 @@ public abstract class AbstractController {
     public void removeUserFromSession (HttpSession session){
         session.removeAttribute("user_id");
     }
-
-/*    public File convert(MultipartFile file) throws IOException {
-        File convFile = new File(file.getOriginalFilename());
-        convFile.createNewFile();
-        FileOutputStream fos = new FileOutputStream(convFile);
-        fos.write(file.getBytes());
-        fos.close();
-        return convFile;
-    }*/
-/*
-    public String photoToId(File photo) throws IOException {
-
-        Map upload = cloudinary.uploader().upload(photo, ObjectUtils.emptyMap());
-        String id = upload.get("public_id").toString();
-        return id;
-
-    }*/
-
 
     @ModelAttribute("user")
     public User getUserForModel(HttpServletRequest request){

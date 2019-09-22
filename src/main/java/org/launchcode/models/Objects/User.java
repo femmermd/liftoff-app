@@ -31,10 +31,20 @@ public class User {
 
     private String hometown;
 
+    private String bio;
+
     private String photoId;
 
     private int imageScale = 400;
 
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
     public String getPhotoId() {
         return photoId;

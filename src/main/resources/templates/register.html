@@ -34,6 +34,10 @@
         <label th:for="hometown" th:text="Hometown"></label>
         <input th:field="*{hometown}"/>
         <span th:errors="*{hometown}">error</span>
+
+        <label th:for="bio" th:text="Bio"></label>
+        <textarea th:field="*{bio}"></textarea>
+
     </div>
     <input type="submit" value="Register">
 </form>

@@ -31,7 +31,15 @@ public class RegisterForm {
 
     private String hometown;
 
+    private String bio;
 
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
 
     public RegisterForm(){}
 

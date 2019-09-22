@@ -108,6 +108,7 @@ public class AccountController extends AbstractController {
         String photoId = upload.get("public_id").toString();
 
         User newUser = new User();
+        newUser.setBio(form.getBio());
         newUser.setHometown(form.getHometown());
         newUser.setUsername(form.getUsername());
         newUser.setPassword(form.getPassword());
@@ -192,7 +193,7 @@ public class AccountController extends AbstractController {
         return "photo";
     }
 
-    @PostMapping("/profilephoto")
+/*    @PostMapping("/profilephoto")
     public String processProfilePhoto(@RequestParam("file") MultipartFile file, HttpServletRequest request) throws IOException {
 
         Map upload = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
@@ -201,8 +202,5 @@ public class AccountController extends AbstractController {
         user.setPhotoId(id);
         userDao.save(user);
         return "redirect:";
-    }
-
-
-
+    }*/
 }
