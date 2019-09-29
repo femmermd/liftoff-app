@@ -22,35 +22,53 @@
                     </table>
                 </div>
             </div>
-
-            <h1 th:text="*{coffeeName}"></h1>
-            <p1 th:text="*{drinkType}"></p1>
-            <p1 th:text="*{origin}"></p1>
-            <p1 th:text="*{rating}"></p1>
-            <p1 th:text="*{story}"></p1>
-            <p1 th:text="*{brewDevice}"></p1>
-            <p1 th:text="*{roaster}"></p1>
-            <p1 th:text="*{cafe}"></p1>
-            <p1 th:text="*{flavors}"></p1>
-            <p1 th:text="*{roast}"></p1>
-            <div th:each="comment : ${commentList}">
-                <div th:if="${comment.review.id} == ${review.id}">
-                    <p1 th:text="${comment.text}"></p1>
-                </div>
-
+            <div class="row">
+                <table class="table">
+                    <tr><td>Drink type</td>
+                        <td th:text="*{drinkType}" />
+                    </tr>
+                    <tr><td>Origin</td>
+                        <td th:text="*{origin}" />
+                    </tr>
+                    <tr><td>Brew device</td>
+                        <td th:text="*{brewDevice}" />
+                    </tr>
+                    <tr><td>Roaster</td>
+                        <td th:text="*{roaster}" />
+                    </tr>
+                    <tr><td>Roast</td>
+                        <td th:text="*{roast}" />
+                    </tr>
+                    <tr><td>I'm tasting</td>
+                        <td th:text="*{flavors}" />
+                    </tr>
+                </table>
             </div>
-
-            <form  class = "form-group" method="post">
-                <div th:object="${commentForm}">
-                    <label th:for="text" th:text="Comment"></label>
-                    <input th:field="*{text}"/>
-                    <span th:errors="*{text}">error</span>
-
-                    <input th:type="submit" th:value="submit"/>
-                </div>
-                <input th:type="hidden" th:value="*{id}" name="reviewId">
-            </form>
-        </div>
+            <div class="row">
+                <table class="table" th:each="comment : ${commentList}">
+                    <tr th:if="${comment.review.id} == ${review.id}">
+                        <!--insert user profile photo here-->
+                        <!--<td><img th:src=""</td>-->
+                        <td th:text="${comment.text}"/>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr>
+                        <td>
+                            <form  class = "form-group" method="post">
+                                <div th:object="${commentForm}">
+                                    <label th:for="text" th:text="Comment"></label>
+                                    <input th:field="*{text}"/>
+                                    <span th:errors="*{text}">error</span>
+                                    <input th:type="submit" th:value="submit"/>
+                                </div>
+                                <input th:type="hidden" th:value="*{id}" name="reviewId">
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            </div>
     </div>
 </div>
 </body>
