@@ -1,45 +1,70 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="'http://www.thymeleaf.org/">
+<!--<html lang="en" xmlns:th="'http://www.thymeleaf.org/" />-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: head"></head>
-<body class="container">
-<h1 th:text="${title}">Default Title</h1>
-<nav th:replace="fragments :: navigation"></nav>
-<p1>index page</p1>
+<body>
+<div class="container-fluid">
+    <nav th:replace="fragments :: navigation"></nav>
 
-<div th:each="review : ${reviewList}">
-    <div th:object="${review}">
-        <img th:src="@{http://res.cloudinary.com/dzpvkjnfe/image/upload/w_{scale},h_{scale},c_scale/v1568512137/{photoId}.jpg(photoId=*{photoId},scale=*{imageScale})}"/>
-        <h1 th:text="*{coffeeName}"></h1>
-        <p1 th:text="*{drinkType}"></p1>
-        <p1 th:text="*{origin}"></p1>
-        <p1 th:text="*{rating}"></p1>
-        <p1 th:text="*{story}"></p1>
-        <p1 th:text="*{brewDevice}"></p1>
-        <p1 th:text="*{roaster}"></p1>
-        <p1 th:text="*{cafe}"></p1>
-        <p1 th:text="*{flavors}"></p1>
-        <p1 th:text="*{roast}"></p1>
-        <div th:each="comment : ${commentList}">
-            <div th:if="${comment.review.id} == ${review.id}">
-                <p1 th:text="${comment.text}"></p1>
+    <div th:each="review : ${reviewList}">
+        <div th:object="${review}">
+            <div class="row">
+                <div class="col-sm-4">
+                    <img th:src="@{http://res.cloudinary.com/dzpvkjnfe/image/upload/w_512,c_scale/v1568512137/{photoId}.jpg(photoId=*{photoId})}" class="img-fluid"/>
+                </div>
+
+                <div class="col-sm-8">
+                    <table class="table">
+                        <tr><td th:text="*{coffeeName}"/></tr>
+                        <tr><td th:text="*{cafe}"/></tr>
+                        <tr><td th:text="*{rating}"/></tr>
+                        <tr><td th:text="*{story}"/></tr>
+                    </table>
+                </div>
             </div>
 
+            <h1 th:text="*{coffeeName}"></h1>
+            <p1 th:text="*{drinkType}"></p1>
+            <p1 th:text="*{origin}"></p1>
+            <p1 th:text="*{rating}"></p1>
+            <p1 th:text="*{story}"></p1>
+            <p1 th:text="*{brewDevice}"></p1>
+            <p1 th:text="*{roaster}"></p1>
+            <p1 th:text="*{cafe}"></p1>
+            <p1 th:text="*{flavors}"></p1>
+            <p1 th:text="*{roast}"></p1>
+            <div th:each="comment : ${commentList}">
+                <div th:if="${comment.review.id} == ${review.id}">
+                    <p1 th:text="${comment.text}"></p1>
+                </div>
+
+            </div>
+
+            <form  class = "form-group" method="post">
+                <div th:object="${commentForm}">
+                    <label th:for="text" th:text="Comment"></label>
+                    <input th:field="*{text}"/>
+                    <span th:errors="*{text}">error</span>
+
+                    <input th:type="submit" th:value="submit"/>
+                </div>
+                <input th:type="hidden" th:value="*{id}" name="reviewId">
+            </form>
         </div>
-
-        <form  class = "form-group" method="post">
-            <div th:object="${commentForm}">
-                <label th:for="text" th:text="Comment"></label>
-                <input th:field="*{text}"/>
-                <span th:errors="*{text}">error</span>
-
-                <input th:type="submit" th:value="submit"/>
-            </div>
-            <input th:type="hidden" th:value="*{id}" name="reviewId">
-
-        </form>
-
     </div>
-
 </div>
 </body>
 </html>
+
+<!--       scrap code
+
+
+           <img
+
+                            th:attr="srcset=|@{http://res.cloudinary.com/dzpvkjnfe/image/upload/w_256,c_scale/v1568512137/{photoId}.jpg(photoId=*{photoId})} 1x,
+                @{http://res.cloudinary.com/dzpvkjnfe/image/upload/w_512,c_scale/v1568512137/{photoId}.jpg(photoId=*{photoId})} 2x,
+                @{http://res.cloudinary.com/dzpvkjnfe/image/upload/w_768,c_scale/v1568512137/{photoId}.jpg(photoId=*{photoId})} 3x,
+                @{http://res.cloudinary.com/dzpvkjnfe/image/upload/w_1024,c_scale/v1568512137/{photoId}.jpg(photoId=*{photoId})} 4x|"
+
+                            class="img-responsive"
+                    />-->

@@ -19,7 +19,7 @@ public class Review {
 
     private String photoId;
 
-    private int imageScale = 400;
+    private int imageScale = 200;
 
     @OneToMany(mappedBy = "review")
     private Set<Comment> comments;
