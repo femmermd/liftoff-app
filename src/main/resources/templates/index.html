@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="col-sm-8">
-                    <table class="table">
+                    <table class="table-responsive">
                         <tr><td th:text="*{coffeeName}"/></tr>
                         <tr><td th:text="*{cafe}"/></tr>
                         <tr><td th:text="*{rating}"/></tr>
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="row">
-                <table class="table">
+                <table class="table-responsive">
                     <tr><td>Drink type</td>
                         <td th:text="*{drinkType}" />
                     </tr>
@@ -45,14 +45,14 @@
                 </table>
             </div>
             <div class="row">
-                <table class="table" th:each="comment : ${commentList}">
+                <table class="table-responsive" th:each="comment : ${commentList}">
                     <tr th:if="${comment.review.id} == ${review.id}">
                         <!--insert user profile photo here-->
                         <!--<td><img th:src=""</td>-->
                         <td th:text="${comment.text}"/>
                     </tr>
                 </table>
-                <table class="table">
+                <table class="table-responsive">
                     <tr>
                         <td>
                             <form  class = "form-group" method="post">
@@ -60,7 +60,7 @@
                                     <label th:for="text" th:text="Comment"></label>
                                     <input th:field="*{text}"/>
                                     <span th:errors="*{text}">error</span>
-                                    <input th:type="submit" th:value="submit"/>
+                                    <input th:type="submit" class="btn btn-outline-primary btn-sm" th:value="submit"/>
                                 </div>
                                 <input th:type="hidden" th:value="*{id}" name="reviewId">
                             </form>

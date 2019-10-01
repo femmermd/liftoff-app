@@ -9,19 +9,29 @@
     <meta name="viewport" content="width=device-witch, initial-scale=1"/>
 </head>
 <body>
-<nav th:fragment="navigation">
-    <a href="/">Home</a>
-    <a href="/review/new">Review</a>
+<ul th:fragment="navigation" class="nav justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link" href="/">Home</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="/review/new">Review</a>
+    </li>
+
     <span th:unless="${user}">
-        <a href="/login">Login or Register</a>
+
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Login/Register</a>
+        </li>
+
     </span>
 
 
     <span th:if="${user}" th:object="${user}">
-        <a th:href="@{/user/{username}(username=*{username})}" th:text="*{username}"></a>
+        <li class="nav-link" th:href="@{/user/{username}(username=*{username})}" th:text="*{username}"></li>
 
-        <a href="/logout">Logout</a>
+        <li class="nav-link" href="/logout">Logout</li>
     </span>
-    </nav>
+    </ul>
 </body>
 </html>
